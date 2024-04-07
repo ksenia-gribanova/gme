@@ -1,7 +1,7 @@
-rom pygame import *
+from pygame import *
+from random import randint
 
-window = display.set_mode((700,500))
-
+window = display.set_mode((700,500)
 background = transform.scale(image.load('stol.jpg'),(700,500))
 
 
@@ -20,10 +20,22 @@ class GameSprite(sprite.Sprite):
 class Player(GameSprite):
     def update(self):
         key_pressed = key.get_pressed()
-        if key_pressed[K_a]:
-            self.rect.x += self.speed
-        if key_pressed[K_d]:
-            self.rect.x -= self.speed
+        if key_pressed[K_w]:
+            self.rect.y += self.speed
+        if key_pressed[K_s]:
+            self.rect.y -= self.speed
 
- player1 = Player('rocket.png',500, 432,4)
-   
+player1 = Player('rocket.png',500, 432,4)
+
+class Player2(GameSprite):
+    def update(self):
+        key_pressed = key.get_pressed()
+        if key_pressed[K_i]
+            self.rect.y += self.speed
+        if key_pressed[K_k]
+            self.rect.y -= self.speed
+
+player2 = Player2('rocket.png', 0, 432, 4)
+
+class Enemy(GameSprite)
+    
