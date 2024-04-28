@@ -1,7 +1,7 @@
 from pygame import *
 from random import randint
 
-window = display.set_mode ((700,500))
+window = display.set_mode ((500,500))
 background = transform.scale(image.load('phon.jpg'),(700,500))
 
 
@@ -17,6 +17,7 @@ class GameSprite(sprite.Sprite):
     def reset(self):
         window.blit(self.image, (self.rect.x, self.rect.y)) 
 
+
 class Player(GameSprite):
     def update(self):
         key_pressed = key.get_pressed()
@@ -25,7 +26,6 @@ class Player(GameSprite):
         if key_pressed[K_s]:
             self.rect.y += self.speed
 
-player1 = Player('raketka.png',0, 100, 0.5)
 
 class Player2(GameSprite):
     def update(self):
@@ -35,10 +35,17 @@ class Player2(GameSprite):
         if key_pressed[K_k]:
             self.rect.y += self.speed
 
-player2 = Player2('raketka.png', 650, 100 , 1)
 
-# class Enemy(GameSprite):
-#     def update (self): 
+class Enemy(GameSprite):
+    def update (self): 
+        
+
+
+
+
+player1 = Player('raketka.png',0, 150, 0.5)
+player2 = Player2('raketka.png', 450, 100, 1)
+
 game = True
 while game:
     window.blit(background, (0, 0))
@@ -52,3 +59,4 @@ while game:
             game = False
         
     display.update()
+
