@@ -1,15 +1,20 @@
 from pygame import *
 from random import randint
 
+clock = time.Clock()
 window = display.set_mode ((500,500))
 background = transform.scale(image.load('phon.jpg'),(700,500))
 
+left = 0
+right =0
 
 class GameSprite(sprite.Sprite):
     def __init__(self, player_image, player_x, player_y, player_speed):
         super().__init__()
         self.image = transform.scale(image.load(player_image), (65,65))
         self.speed = player_speed
+        self.speedX = player_speed
+        self.speedY = player_speed
         self.rect = self.image.get_rect()
         self.rect.x = player_x
         self.rect.y = player_y
@@ -38,13 +43,32 @@ class Player2(GameSprite):
 
 class Enemy(GameSprite):
     def update (self): 
+        global left
+        global right
+        self.rect.x += self.speedX
+        self.rect.y += self.speedY
+        if sprite.collide_rect(self, player1):
+            self.speedX *= -1
+        if sprite.collide_rect(self, player2):
+            self.speedX *= -1
+        if self.rect.y >= 450 or self.rect.y <= 0:
+            self.speedY *= -1
+        if self.rect.x >= 500:
+            left +=1
+            self.rect.x = 250
+        if self.rect.x <= 0:
+            right +=1
+            self.rect.x = 250
+        
+    
         
 
 
 
+player1 = Player('raketka1.png',0, 150, 3)
+player2 = Player2('raketka1.png', 450, 100, 3)
+mach = Enemy('vach1.png',250,250, 2)
 
-player1 = Player('raketka.png',0, 150, 0.5)
-player2 = Player2('raketka.png', 450, 100, 1)
 
 game = True
 while game:
@@ -53,10 +77,20 @@ while game:
     player2.reset()
     player1.update()
     player2.update()
+    mach.reset()
+    mach.update()
+    font.init()
+    font2 = font.Font (None, 70)
+    scoreText = font2.render(str(left) + ':' + str(right), True, (255,215,0))
+    window.blit(scoreText, (220, 0))
+
 
     for e in event.get():
         if e.type == QUIT:
             game = False
         
     display.update()
+    clock.tick(60)
+
+
 
