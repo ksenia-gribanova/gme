@@ -9,9 +9,9 @@ left = 0
 right =0
 
 class GameSprite(sprite.Sprite):
-    def __init__(self, player_image, player_x, player_y, player_speed):
+    def __init__(self, player_image, player_x, player_y, player_speed, player_w, player_h):
         super().__init__()
-        self.image = transform.scale(image.load(player_image), (65,65))
+        self.image = transform.scale(image.load(player_image), (player_w,player_h))
         self.speed = player_speed
         self.speedX = player_speed
         self.speedY = player_speed
@@ -65,9 +65,9 @@ class Enemy(GameSprite):
 
 
 
-player1 = Player('raketka1.png',0, 150, 3)
-player2 = Player2('raketka1.png', 450, 100, 3)
-mach = Enemy('vach1.png',250,250, 2)
+player1 = Player('raketka1.png',0, 150, 3, 50, 50)
+player2 = Player2('raketka1.png', 450, 100, 3, 50, 50)
+mach = Enemy('vach1.png',250,250, 2, 30, 30)
 
 
 game = True
